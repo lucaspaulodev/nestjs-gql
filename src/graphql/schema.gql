@@ -3,34 +3,26 @@
 # ------------------------------------------------------
 
 type Todo {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int!
+  title: String!
 }
 
 type Query {
-  users: String!
+  todos: [Todo!]!
   todo(id: Int!): Todo!
 }
 
 type Mutation {
-  createUser(data: CreateUserInput!): String!
   createTodo(createTodoInput: CreateTodoInput!): Todo!
   updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
   removeTodo(id: Int!): Todo!
 }
 
-input CreateUserInput {
-  name: String!
-  email: String!
-}
-
 input CreateTodoInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  title: String!
 }
 
 input UpdateTodoInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  title: String!
   id: Int!
 }

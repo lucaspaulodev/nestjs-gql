@@ -8,7 +8,7 @@ import { UpdateTodoInput } from './dto/update-todo.input';
 export class TodoResolver {
   constructor(private readonly todoService: TodoService) {}
 
-  @Query(() => [Todo], { name: 'todo' })
+  @Query(() => [Todo], { name: 'todos' })
   findAll() {
     return this.todoService.findAll();
   }

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { UserResolver } from './graphql/resolver/user';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'path';
 import { TodoModule } from './todo/todo.module';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [
@@ -17,6 +17,6 @@ import { TodoModule } from './todo/todo.module';
     TodoModule,
   ],
   controllers: [],
-  providers: [UserResolver],
+  providers: [PrismaService],
 })
 export class AppModule {}
