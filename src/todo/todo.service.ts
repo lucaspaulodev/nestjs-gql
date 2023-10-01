@@ -10,6 +10,7 @@ export class TodoService {
     return await this.prisma.todo.create({
       data: {
         title: createTodoInput.title,
+        detail: createTodoInput.detail
       }
     });
   }
@@ -25,7 +26,10 @@ export class TodoService {
   update(id: number, updateTodoInput: UpdateTodoInput) {
     return this.prisma.todo.update({
       where: { id },
-      data: {title: updateTodoInput.title}
+      data: {
+        title: updateTodoInput.title,
+        detail: updateTodoInput.detail
+      }
     });
   }
 

@@ -5,6 +5,7 @@
 type Todo {
   id: Int!
   title: String!
+  detail: String
 }
 
 type Query {
@@ -20,9 +21,11 @@ type Mutation {
 
 input CreateTodoInput {
   title: String!
+  detail: String
 }
 
 input UpdateTodoInput {
   title: String!
+  detail: String
   id: Int!
 }

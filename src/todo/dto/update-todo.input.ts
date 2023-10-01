@@ -8,4 +8,7 @@ export class UpdateTodoInput extends PartialType(CreateTodoInput) {
 
   @Field()
   title: string
+
+  @Field({ nullable: true })
+  detail?: string
 }

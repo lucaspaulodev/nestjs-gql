@@ -7,4 +7,7 @@ export class Todo {
 
   @Field()
   title: string;
+
+  @Field({ nullable: true })
+  detail?: string
 }
