@@ -2,15 +2,35 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Todo {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   users: String!
+  todo(id: Int!): Todo!
 }
 
 type Mutation {
   createUser(data: CreateUserInput!): String!
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+  removeTodo(id: Int!): Todo!
 }
 
 input CreateUserInput {
   name: String!
   email: String!
+}
+
+input CreateTodoInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateTodoInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
