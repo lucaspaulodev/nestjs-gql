@@ -1,16 +1,17 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { TodoService } from './todo.service';
-import { Todo } from './entities/todo.entity';
+import { Todo, TodoConnection } from './entities/todo.entity';
 import { CreateTodoInput } from './dto/create-todo.input';
 import { UpdateTodoInput } from './dto/update-todo.input';
+import { CursorPaginationArgs } from './dto/cursor-pagination-args.input';
 
 @Resolver(() => Todo)
 export class TodoResolver {
   constructor(private readonly todoService: TodoService) {}
 
-  @Query(() => [Todo], { name: 'todos' })
-  findAll() {
-    return this.todoService.findAll();
+  @Query(() => TodoConnection, { name: 'todos' })
+  async findAll(@Args('paginationArgs') paginationArgs: CursorPaginationArgs,): Promise<TodoConnection> {
+    return this.todoService.findWithPagination(paginationArgs);
   }
 
   @Query(() => Todo, { name: 'todo' })

@@ -8,9 +8,29 @@ type Todo {
   detail: String
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  endCursor: Float
+}
+
+type TodoConnection {
+  edges: [TodoEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TodoEdge {
+  cursor: Float!
+  node: Todo!
+}
+
 type Query {
-  todos: [Todo!]!
+  todos(paginationArgs: CursorPaginationArgs!): TodoConnection!
   todo(id: Int!): Todo!
+}
+
+input CursorPaginationArgs {
+  first: Int! = 3
+  after: Float
 }
 
 type Mutation {
