@@ -1,9 +1,9 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { TodoService } from './todo.service';
-import { Todo, TodoConnection } from './entities/todo.entity';
-import { CreateTodoInput } from './dto/create-todo.input';
-import { UpdateTodoInput } from './dto/update-todo.input';
-import { CursorPaginationArgs } from './dto/cursor-pagination-args.input';
+import { Todo, TodoConnection } from './models/todo.model';
+import { CreateTodoInput } from './models/create-todo.input';
+import { UpdateTodoInput } from './models/update-todo.input';
+import { CursorPaginationArgs } from './models/cursor-pagination-args.input';
 
 @Resolver(() => Todo)
 export class TodoResolver {
