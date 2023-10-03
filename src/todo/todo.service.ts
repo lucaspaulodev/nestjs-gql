@@ -3,15 +3,13 @@ import { CreateTodoInput } from './models/create-todo.input';
 import { UpdateTodoInput } from './models/update-todo.input';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CursorPaginationArgs } from 'src/todo/models/cursor-pagination-args.input';
-import { Todo, TodoConnection, TodoEdge } from './models/todo.model';
-import { TodoRepository } from './todo.repository';
 
 @Injectable()
 export class TodoService {
-  constructor(private readonly repository: TodoRepository) {}
+  constructor(private readonly prisma: PrismaService) {}
   
   async create(createTodoInput: CreateTodoInput) {
-    return await this.repository.create({
+    return await this.prisma.todo.create({
       data: {
         title: createTodoInput.title,
         detail: createTodoInput.detail
@@ -22,7 +20,7 @@ export class TodoService {
   async findWithPagination({ first, after }: CursorPaginationArgs) {
     const take = first + 1; // Fetch one more record than requested to determine hasNextPage
 
-    const todos = await this.repository.findMany({
+    const todos = await this.prisma.todo.findMany({
       take,
       cursor: after ? { id: after }  : undefined ,
       orderBy: {created_at: 'desc'}
@@ -48,15 +46,15 @@ export class TodoService {
   }
 
   async findAll() {
-    return await this.repository.findMany();
+    return await this.prisma.todo.findMany();
   }
 
   async findOne(id: number) {
-    return await this.repository.findUnique({where: { id }});
+    return await this.prisma.todo.findUnique({where: { id }});
   }
 
   async update(id: number, updateTodoInput: UpdateTodoInput) {
-    return await this.repository.update({
+    return await this.prisma.todo.update({
       where: { id },
       data: {
         title: updateTodoInput.title,
@@ -66,6 +64,6 @@ export class TodoService {
   }
 
   async remove(id: number) {
-    return await this.repository.delete({where: { id }});
+    return await this.prisma.todo.delete({where: { id }});
   }
 }
