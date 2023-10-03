@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTodoInput } from './models/create-todo.input';
 import { UpdateTodoInput } from './models/update-todo.input';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { CursorPaginationArgs } from 'src/todo/models/cursor-pagination-args.input';
+import { PrismaService } from '../prisma/prisma.service';
+import { CursorPaginationArgs } from '../todo/models/cursor-pagination-args.input';
 
 @Injectable()
 export class TodoService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {}
   
   async create(createTodoInput: CreateTodoInput) {
     return await this.prisma.todo.create({
@@ -54,16 +54,26 @@ export class TodoService {
   }
 
   async update(id: number, updateTodoInput: UpdateTodoInput) {
-    return await this.prisma.todo.update({
-      where: { id },
-      data: {
-        title: updateTodoInput.title,
-        detail: updateTodoInput.detail
-      }
-    });
+    try{
+      return await this.prisma.todo.update({
+        where: { id },
+        data: {
+          title: updateTodoInput.title,
+          detail: updateTodoInput.detail
+        }
+      });
+    } catch (error) {
+      throw new NotFoundException()
+    }
+    
   }
 
   async remove(id: number) {
-    return await this.prisma.todo.delete({where: { id }});
+    try{
+      return await this.prisma.todo.delete({where: { id }});
+    } catch (error) {
+      throw new NotFoundException()
+    }
+    
   }
 }
