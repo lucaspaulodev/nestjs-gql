@@ -24,7 +24,8 @@ type TodoEdge {
 }
 
 type Query {
-  todos(paginationArgs: CursorPaginationArgs!): TodoConnection!
+  todos_paginated_query(paginationArgs: CursorPaginationArgs!): TodoConnection!
+  todos: [Todo!]!
   todo(id: Int!): Todo!
 }
 
