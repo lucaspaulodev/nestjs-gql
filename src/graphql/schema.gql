@@ -36,7 +36,7 @@ input CursorPaginationArgs {
 
 type Mutation {
   createTodo(createTodoInput: CreateTodoInput!): Todo!
-  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): Todo!
   removeTodo(id: Int!): Todo!
 }
 
@@ -48,5 +48,4 @@ input CreateTodoInput {
 input UpdateTodoInput {
   title: String!
   detail: String
-  id: Int!
 }
