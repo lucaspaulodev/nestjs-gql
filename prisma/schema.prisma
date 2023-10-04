@@ -16,5 +16,5 @@ model Todo {
   detail String?
 
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
