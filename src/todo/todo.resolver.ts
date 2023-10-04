@@ -10,7 +10,7 @@ export class TodoResolver {
   constructor(private readonly todoService: TodoService) {}
 
   @Query(() => TodoConnection, { name: 'todos_paginated_query' })
-  async findAllPaginated(@Args('paginationArgs') paginationArgs: CursorPaginationArgs,): Promise<TodoConnection> {
+  async findAllPaginated(@Args('paginationArgs') paginationArgs: CursorPaginationArgs): Promise<TodoConnection> {
     return await this.todoService.findWithPagination(paginationArgs);
   }
 
@@ -30,8 +30,10 @@ export class TodoResolver {
   }
 
   @Mutation(() => Todo)
-  async updateTodo(@Args('updateTodoInput') updateTodoInput: UpdateTodoInput) {
-    return await this.todoService.update(updateTodoInput.id, updateTodoInput);
+  async updateTodo(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('updateTodoInput') updateTodoInput: UpdateTodoInput) {
+    return await this.todoService.update(id, updateTodoInput);
   }
 
   @Mutation(() => Todo)
