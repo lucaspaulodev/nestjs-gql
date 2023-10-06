@@ -1,11 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UseGuards } from '@nestjs/common';
 import { CreateTodoInput } from './models/create-todo.input';
 import { UpdateTodoInput } from './models/update-todo.input';
 import { PrismaService } from '../prisma/prisma.service';
 import { CursorPaginationArgs } from '../todo/models/cursor-pagination-args.input';
 import { Todo, TodoConnection, TodoEdge } from './models/todo.model';
+import { ThrottlerGuard } from "@nestjs/throttler";
 
 @Injectable()
+@UseGuards(ThrottlerGuard)
 export class TodoService {
   constructor(private prisma: PrismaService) {}
   
@@ -24,7 +26,7 @@ export class TodoService {
     const todos: Todo[] = await this.prisma.todo.findMany({
       take,
       cursor: after ? { id: after }  : undefined ,
-      orderBy: {created_at: 'desc'}
+      orderBy: {created_at: 'asc'}
     });
 
     const edges: TodoEdge[] = todos.slice(0, first).map((todo) => {

@@ -2,15 +2,19 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { join } from 'path';
 import { TodoModule } from './todo/todo.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrismaService } from './prisma/prisma.service';
+import {ThrottlerModule} from '@nestjs/throttler'
 
 @Module({
   imports: [
     TodoModule,
     PrismaModule,
+    ThrottlerModule.forRoot([{
+      ttl: 1000,
+      limit: 3,
+    }]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/schema.gql',
@@ -19,6 +23,8 @@ import { PrismaService } from './prisma/prisma.service';
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
   ],
-  providers: [PrismaService],
+  providers: [
+    PrismaService,
+  ],
 })
 export class AppModule {}
