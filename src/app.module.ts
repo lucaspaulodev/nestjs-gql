@@ -13,7 +13,7 @@ import {ThrottlerModule} from '@nestjs/throttler'
     PrismaModule,
     ThrottlerModule.forRoot([{
       ttl: 1000,
-      limit: 3,
+      limit: 10,
     }]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
