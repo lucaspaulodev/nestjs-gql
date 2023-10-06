@@ -1,7 +1,5 @@
 # Welcome GEMINI Team to NestJS GraphQL Project
 
-![NestJS Logo](https://nestjs.com/img/logo_text.svg)
-
 This project provides a GraphQL API built with NestJS and Prisma as requested on this link: https://geminisports.notion.site/geminisports/Sr-Full-Stack-Engineer-Technical-Evaluation-811e1b6bd8ca4f5cb893bec29e4531ab. 
 
 ## Getting Started
