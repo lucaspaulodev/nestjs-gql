@@ -4,8 +4,11 @@ import { Todo, TodoConnection } from './models/todo.model';
 import { CreateTodoInput } from './models/create-todo.input';
 import { UpdateTodoInput } from './models/update-todo.input';
 import { CursorPaginationArgs } from './models/cursor-pagination-args.input';
+import { GqlThrottlerGuard } from 'src/security/guards/gql-throttler/gql-throttler.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver(() => Todo)
+@UseGuards(GqlThrottlerGuard)
 export class TodoResolver {
   constructor(private readonly todoService: TodoService) {}
 
