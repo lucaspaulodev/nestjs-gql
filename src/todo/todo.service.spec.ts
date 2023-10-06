@@ -1,26 +1,25 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TodoService } from './todo.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { fakePaginatedTodos, fakeTodoDatabaseMethods, fakeTodos, fakeUniqueTodo, updateTodoInput, updatedTodo } from './test/mock-todo';
-import { Todo } from '@prisma/client';
 import { TodoConnection } from './models/todo.model';
+import { MockTodoService } from './test/mock-todo.service';
 
 describe('TodoService', () => {
-  let service: TodoService;
+  let service: MockTodoService;
   let prisma: PrismaService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        TodoService,
+        MockTodoService,
         {
           provide: PrismaService,
           useValue: fakeTodoDatabaseMethods
-        }
+        },
       ],
     }).compile();
 
-    service = module.get<TodoService>(TodoService);
+    service = module.get<MockTodoService>(MockTodoService);
     prisma = module.get<PrismaService>(PrismaService);
   });
 
