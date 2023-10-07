@@ -6,9 +6,13 @@ import { TodoModule } from './todo/todo.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrismaService } from './prisma/prisma.service';
 import {ThrottlerModule} from '@nestjs/throttler'
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     TodoModule,
     PrismaModule,
     ThrottlerModule.forRoot([{
