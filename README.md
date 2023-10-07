@@ -44,3 +44,20 @@ If you want to populate the database with sample data, you can run the seed scri
 ```bash
 npm run seed
 ```
+### 5. Run the API
+
+Find the `.env.example` file and rename it to `.env`. Open it and assign a value to API_PORT (I like to use 3333, you can choose any port that is not busy with processes on your machine). And then, run:
+
+```bash
+npm run start:dev
+```
+
+After running this command, you'll able to see on your terminal which port your API is running:
+
+### 6. Running tests:
+
+To run and watch the tests of the application's service module methods, run the command:
+
+```bash
+npm run test:watch
+```
