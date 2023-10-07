@@ -13,7 +13,7 @@ async function bootstrap() {
   })
   app.enableShutdownHooks();
 
-  await app.listen(3333);
+  await app.listen(process.env.API_PORT);
 
   console.log(`Application is running on: ${await app.getUrl()}`);
   console.log(`GraphQL Playground: ${await app.getUrl()}/graphql`);
